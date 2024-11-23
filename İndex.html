@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Robux Generator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #f4f4f4;
+            font-family: Arial, sans-serif;
+            color: #333;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: #0099FF;
+        }
+
+        .description {
+            font-size: 1.1em;
+            margin-bottom: 20px;
+        }
+
+        form {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 1em;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 10px;
+            background-color: #0099FF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            cursor: pointer;
+        }
+
+        .submit-btn:hover {
+            background-color: #007acc;
+        }
+
+        footer {
+            text-align: center;
+            font-size: 0.9em;
+            color: #555;
+            margin-top: 30px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        #loadingScreen {
+            margin-top: 30px;
+        }
+
+        .loading-text {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+
+        .loading-bar-container {
+            width: 100%;
+            background-color: #ccc;
+            height: 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .loading-bar {
+            width: 0%;
+            height: 100%;
+            background-color: #0099FF;
+            border-radius: 5px;
+            transition: width 3s ease-in-out;
+        }
+
+        #resultScreen {
+            text-align: center;
+        }
+
+        #resultScreen h2 {
+            font-size: 2em;
+            color: #0099FF;
+        }
+
+        #resultScreen .robux-count {
+            font-size: 2em;
+            color: #0099FF;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        #resultScreen .generated-text {
+            font-size: 1.5em;
+            color: #0099FF;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Free Robux Generator</h1>
+        </header>
+
+        <div class="content">
+            <p class="description">Get free Robux by filling in your username and the amount you want!</p>
+
+            <form id="robuxForm">
+                <label for="username">Enter your Roblox username:</label>
+                <input type="text" id="username" placeholder="Your Roblox username" required>
+
+                <label for="robux">How many Robux do you want?</label>
+                <input type="number" id="robux" placeholder="e.g., 1000" min="1" required>
+
+                <button type="submit" class="submit-btn">Generate Robux</button>
+            </form>
+
+            <div id="loadingScreen" class="hidden">
+                <div class="loading-text">Generating Robux...</div>
+                <div class="loading-bar-container">
+                    <div id="loadingBar" class="loading-bar"></div>
+                </div>
+                <div class="loading-text">Generating Robux for you...</div>
+                <div id="robuxProgress" class="hidden"></div>
+            </div>
+
+            <div id="resultScreen" class="hidden">
+                <h2>Your Robux Transferring to account!</h2>
+                <p>Robux is now loading.</p>
+                <div class="robux-count">
+                    <span id="generatedRobux">0</span> Robux
+                </div>
+                <div class="generated-text">Transfered</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("robuxForm").addEventListener("submit", function (event) {
+            event.preventDefault(); // Formun varsayılan gönderimini engelle
+
+            var robuxAmount = document.getElementById("robux").value; // Kullanıcının girdiği Robux miktarını al
+
+            // Formu gizle ve yüklenme ekranını göster
+            document.getElementById("robuxForm").classList.add("hidden");
+            document.getElementById("loadingScreen").classList.remove("hidden");
+
+            // Yükleme çubuğunu başlat
+            setTimeout(() => {
+                document.getElementById("loadingBar").style.width = "100%"; // Yükleme çubuğunu tamamla
+            }, 100); // Başlangıçta hemen biraz ilerletir
+
+            // Robux sayısını hızla artacak şekilde göster
+            var robuxCounter = 0;
+            var interval = setInterval(function () {
+                if (robuxCounter < robuxAmount) {
+                    robuxCounter++; // Her bir adımdaki artış 1 olacak
+                    document.getElementById("generatedRobux").innerText = robuxCounter;
+                } else {
+                    clearInterval(interval);
+                }
+            }, 50); // 50ms aralıklarla sayıyı güncelle
+
+            // 3 saniye sonra sonucu göster
+            setTimeout(() => {
+                document.getElementById("loadingScreen").classList.add("hidden");
+                document.getElementById("resultScreen").classList.remove("hidden");
+            }, 3000);
+        });
+    </script>
+</body>
+</html>
